@@ -1,3 +1,11 @@
+
+console.log("Inicializando Game Celest modular...");
+
+// Cargar puntaje máximo
+const highScore = StorageManager.getHighScore();
+console.log("Puntaje máximo:", highScore);
+
+// Ejecutar juego original
 const canvas=document.getElementById('c');
 const ctx=canvas.getContext('2d');
 let W=800,H=600,DPR=1;
@@ -610,3 +618,12 @@ function loop(ts){
   requestAnimationFrame(loop); if(!lastTs)lastTs=ts; deltaSec=Math.min(.033,Math.max(.001,(ts-lastTs)/1000)); lastTs=ts; if(gameState!=='start')gameClock+=deltaSec; if(gameState==='start')return; const lv=LEVELS[curLvl]; drawBackground(lv,ts); drawPlatforms(lv); drawHazards(lv); drawGems(lv); drawPlayer(ts); drawParts(); if(gameState==='playing')updatePlayer();
 }
 requestAnimationFrame(loop);
+
+// Guardar puntaje automáticamente
+window.addEventListener("beforeunload", () => {
+    try {
+        StorageManager.saveHighScore(score || 0);
+    } catch(e){
+        console.log("No se pudo guardar el puntaje");
+    }
+});
