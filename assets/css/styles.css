@@ -1,0 +1,47 @@
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#050011;font-family:monospace}
+body{min-height:100vh;min-height:100dvh}
+#wrap{position:relative;width:100vw;height:100vh;height:100dvh;overflow:hidden;touch-action:none;background:#050011}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#hud{position:absolute;top:10px;left:14px;color:#fff;font-size:13px;text-shadow:0 0 8px #a855f7;line-height:1.9;pointer-events:none;z-index:2;background:rgba(10,0,24,.35);padding:7px 11px;border:1px solid rgba(192,132,252,.28);border-radius:12px;backdrop-filter:blur(3px)}
+#modal{position:absolute;inset:0;background:rgba(8,2,24,0.94);display:none;align-items:center;justify-content:center;z-index:10;pointer-events:all;padding:14px}
+#modalBox{background:linear-gradient(180deg,#1e0a40,#10051f);border:2px solid #a855f7;border-radius:14px;padding:26px 30px;max-width:600px;width:92%;color:#fff;box-shadow:0 0 35px rgba(168,85,247,.28)}
+#modalBox h2{color:#c084fc;font-size:14px;margin-bottom:11px;text-transform:uppercase;letter-spacing:1px}
+#modalBox p{font-size:13px;line-height:1.65;margin-bottom:14px;color:#e2d9f3}
+.opt{display:block;width:100%;text-align:left;background:#241044;border:1.5px solid #7c3aed;color:#e2d9f3;padding:10px 13px;margin-bottom:8px;border-radius:8px;cursor:pointer;font-size:12px;font-family:monospace;transition:.12s transform,.12s background,.12s border-color}
+.opt:hover{background:#3b1775;border-color:#c084fc;transform:translateX(3px)}
+.opt:disabled{cursor:default;transform:none}
+.opt.correct{background:#14532d;border-color:#4ade80;color:#bbf7d0}
+.opt.wrong{background:#450a0a;border-color:#f87171;color:#fecaca}
+#feedback{font-size:12px;margin-top:9px;padding:9px;border-radius:6px;display:none;line-height:1.5}
+#continueBtn{display:none;margin-top:12px;background:#7c3aed;color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:12px;font-family:monospace;letter-spacing:.5px}
+#continueBtn:hover{background:#9333ea}
+#startScreen,#winScreen{position:absolute;inset:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:20;pointer-events:all;text-align:center;padding:22px}
+#startScreen{background:radial-gradient(circle at 50% 35%,#341164 0%,#17072d 42%,#050011 100%)}
+#winScreen{background:rgba(5,0,17,0.97);display:none}
+#startScreen h1{color:#e9d5ff;font-size:30px;text-shadow:0 0 20px #a855f7;margin-bottom:8px;letter-spacing:1px}
+#winScreen h1{color:#4ade80;font-size:25px;text-shadow:0 0 18px #22c55e;margin-bottom:10px}
+#winScreen p,#startScreen p{color:#c4b5fd;font-size:13px;margin-bottom:4px;max-width:800px;line-height:1.45}
+#startBtn,#winBtn{margin-top:22px;background:#7c3aed;color:#fff;border:none;padding:12px 36px;border-radius:9px;cursor:pointer;font-size:14px;font-family:monospace;letter-spacing:1px;box-shadow:0 0 22px rgba(124,58,237,.35)}
+#startBtn:hover,#winBtn:hover{background:#9333ea}
+#deathMsg{position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);color:#f87171;font-size:18px;text-align:center;display:none;text-shadow:0 0 10px #ef4444;pointer-events:none;z-index:5;background:rgba(69,10,10,.25);padding:15px 24px;border:1px solid rgba(248,113,113,.35);border-radius:12px}
+#hint{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);color:#ddd6fe;font-size:11px;pointer-events:none;z-index:2;white-space:nowrap;text-align:center;text-shadow:0 0 8px #000;background:rgba(0,0,0,.18);padding:5px 10px;border-radius:999px}
+.badge{color:#fbbf24;font-size:11px;margin-top:10px;border:1px solid rgba(251,191,36,.35);padding:5px 10px;border-radius:999px;background:rgba(251,191,36,.08)}
+#musicBtn{position:absolute;top:10px;right:14px;z-index:3;background:rgba(15,23,42,.62);color:#e9d5ff;border:1px solid rgba(192,132,252,.45);padding:7px 11px;border-radius:999px;font:11px monospace;cursor:pointer;backdrop-filter:blur(3px)}
+#musicBtn:hover{background:rgba(76,29,149,.72)}
+
+#mobileControls{position:absolute;left:0;right:0;bottom:18px;display:none;align-items:flex-end;justify-content:space-between;padding:0 18px;z-index:4;pointer-events:none;gap:16px}
+.touchCluster{pointer-events:auto;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+#mobileDpad{display:grid;grid-template-columns:56px 56px 56px;grid-template-rows:56px 56px 56px;gap:7px}
+#mobileActions{display:flex;align-items:flex-end;gap:12px}
+.touchBtn{width:56px;height:56px;border-radius:16px;border:1.5px solid rgba(216,180,254,.62);background:rgba(30,10,64,.72);color:#f5f3ff;font:700 18px monospace;box-shadow:0 0 18px rgba(124,58,237,.25);backdrop-filter:blur(5px);touch-action:none;cursor:pointer;text-shadow:0 0 8px #a855f7}
+.touchBtn.isDown,.touchBtn:active{background:rgba(124,58,237,.92);border-color:#e9d5ff;transform:translateY(2px);box-shadow:0 0 24px rgba(192,132,252,.48)}
+.dpadUp{grid-column:2;grid-row:1}.dpadLeft{grid-column:1;grid-row:2}.dpadRight{grid-column:3;grid-row:2}.dpadDown{grid-column:2;grid-row:3}
+.actionBtn{width:76px;height:76px;border-radius:50%;font-size:11px;letter-spacing:.4px;line-height:1.1;padding:0 6px}
+.jumpBtn{border-color:rgba(125,211,252,.7);box-shadow:0 0 18px rgba(34,211,238,.22)}
+.dashBtn{border-color:rgba(255,255,255,.82);box-shadow:0 0 20px rgba(255,255,255,.22)}
+@media (hover:none),(pointer:coarse),(max-width:800px){#mobileControls{display:flex}#hint{bottom:104px;font-size:10px;max-width:96%;white-space:normal}.touchBtn{width:54px;height:54px}#mobileDpad{grid-template-columns:54px 54px 54px;grid-template-rows:54px 54px 54px}.actionBtn{width:72px;height:72px}}
+@media (max-width:430px){#mobileControls{padding:0 10px;bottom:14px}.touchBtn{width:48px;height:48px;border-radius:14px;font-size:16px}#mobileDpad{grid-template-columns:48px 48px 48px;grid-template-rows:48px 48px 48px;gap:6px}.actionBtn{width:64px;height:64px;font-size:10px}#mobileActions{gap:9px}#hint{bottom:92px}}
+@media (max-height:540px){#mobileControls{bottom:8px;transform:scale(.86);transform-origin:bottom center}#hint{display:none}}
+#musicNote{color:#93c5fd!important;font-size:11px!important;margin-top:9px!important;max-width:760px}
+@media (max-width:600px){#startScreen h1{font-size:23px}#startScreen p,#winScreen p{font-size:11px;padding:0 10px}#modalBox{padding:20px 18px}.opt{font-size:11px;padding:8px 10px}#hud{font-size:11px;line-height:1.75}#hint{font-size:10px;width:95%;white-space:normal}}
